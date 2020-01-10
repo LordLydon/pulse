@@ -1,4 +1,4 @@
-interface StorageMethods {
+export interface StorageMethods {
   async?: boolean;
   get?: any;
   set?: any;
@@ -6,7 +6,7 @@ interface StorageMethods {
 }
 
 export default class Storage {
-  private isPromise: boolean = false;
+  public isPromise: boolean = false;
   private storageReady: boolean = false;
   private storageType: 'localStorage' | 'custom' = 'localStorage';
   constructor(private storageMethods: StorageMethods = {}) {

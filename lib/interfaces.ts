@@ -7,7 +7,7 @@ import Computed from './computed';
 import { JobType } from './runtime';
 import RelationController from './relationController';
 import Module from './module';
-import Storage from './storage';
+import Storage, { StorageMethods } from './storage';
 export interface RequestConfig {
   baseURL?: string;
   requestIntercept?: () => void;
@@ -30,12 +30,12 @@ export interface RootConfig {
   frameworkConstructor?: any;
   waitForMount?: boolean;
   autoUnmount?: boolean;
-  logJobs: boolean;
-  computedDefault: boolean;
+  logJobs?: boolean;
+  computedDefault?: boolean;
   baseModuleAlias?: boolean;
   mapDataUnderPropName?: string;
   debugMode?: Set<DebugType>;
-  bindInstanceTo: string | boolean;
+  bindInstanceTo?: string | boolean;
 }
 export interface CollectionConfig {}
 
@@ -53,6 +53,7 @@ export interface CollectionObject {
   local?: Object;
   onReady?: Function;
   staticData?: Object;
+  request?: any; // Property 'request' does not exist on type 'CollectionObject'. - lib/module/module.ts (72:37)
   // private
   indexes?: Object;
 }
@@ -64,6 +65,7 @@ export interface RootCollectionObject extends CollectionObject {
   config?: RootConfig;
   request?: object;
   collections?: object;
+  storage?: StorageMethods;
 }
 
 export interface Methods {
@@ -87,7 +89,7 @@ export interface Methods {
 }
 
 export interface Keys {
-  staticData: string[];
+  staticData?: string[];
   data?: Array<string>;
   computed?: Array<string>;
   actions?: Array<string>;
@@ -121,7 +123,7 @@ export interface Global {
   log: Function;
 }
 
-modules: any;
+// modules: any;
 export type ModuleInstance = Module | Collection;
 
 export interface Private {

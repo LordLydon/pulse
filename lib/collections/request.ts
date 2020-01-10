@@ -6,7 +6,7 @@ type Method = 'get' | 'put' | 'post' | 'patch' | 'delete';
 
 export default class Request extends Module {
   private timeout: number;
-  private options: object;
+  private options: any;
   private saveHistory: boolean;
 
   private requestIntercept: (context: object, options: object) => void;
@@ -138,6 +138,7 @@ export default class Request extends Module {
 
     // history
     if (!this.saveHistory)
+      // @ts-ignore
       this.collect({
         id: Date.now(),
         status: response.status,

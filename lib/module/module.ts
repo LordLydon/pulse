@@ -116,12 +116,14 @@ export default class Module {
   }
 
   private initRoutes(routes: object = {}) {
+    // @ts-ignore
     this.keys.routes = Object.keys(routes);
 
     const routeWrapped = routeName => {
       let self = this;
       return function() {
         let requestObject = Object.assign({}, self.global.request);
+        // @ts-ignore
         requestObject.context = self.global.contextRef;
 
         return routes[routeName].apply(
@@ -151,6 +153,7 @@ export default class Module {
   }
 
   private initWatchers(watchers: object = {}): void {
+    // @ts-ignore
     this.keys.watchers = Object.keys(watchers);
 
     for (let watcherName in watchers) {
@@ -240,6 +243,7 @@ export default class Module {
     l.routes = this.public.object.routes;
 
     if (this.keys.indexes) {
+      // @ts-ignore
       l.indexes = this.indexes.public.object;
     }
 
@@ -306,11 +310,13 @@ export default class Module {
           collection: this,
           dep: this.getDep(property)
         });
+        // @ts-ignore
       } else if (this.indexes && this.indexes.exists(property)) {
         this.global.ingest({
           type: JobType.GROUP_UPDATE,
           property,
-          collection: this,
+          collection: this, 
+          // @ts-ignore
           dep: this.getDep(property, this.indexes.object)
         });
       }

@@ -16,7 +16,7 @@ export interface Job {
   previousValue?: any;
   dep?: Dep;
   fromAction?: boolean | Action;
-  config?: Object;
+  config?: any;
 }
 
 export enum JobType {
@@ -41,7 +41,7 @@ export default class Runtime {
   public runningAction: Action | boolean = false;
 
   // private collections: Object;
-  private config: Object;
+  private config: any;
 
   constructor(private collections: Object, private global: Global) {
     global.ingest = this.ingest.bind(this);
@@ -299,6 +299,7 @@ export default class Runtime {
   public performComputedOutput(job: Job): void {
     const computed: Computed =
       typeof job.property === 'string'
+        // @ts-ignore
         ? job.collection.computed[job.property]
         : job.property;
 
@@ -417,6 +418,7 @@ export default class Runtime {
   // TODO: add moduleType to module class and store persist keys with that in mind, since persisting data won't work for modules with the same name, although devs should not be creating modules with the same name, i don't even think thats possible
   private persistData(job: Job): void {
     if (job.type === JobType.INTERNAL_DATA_MUTATION) return;
+    // @ts-ignore
     if (job.collection.persist.includes(job.property)) {
       this.global.storage.set(job.collection.name, job.property, job.value);
     }

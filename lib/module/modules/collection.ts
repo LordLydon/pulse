@@ -247,7 +247,7 @@ export default class Collection extends Module {
   public collectByKeys(
     data: { [key: string]: any },
     group?: string | Array<string>,
-    config?: object
+    config?: any
   ) {
     if (!config) config = {};
     config.byKeys = true;
@@ -255,7 +255,7 @@ export default class Collection extends Module {
   }
 
   // METHODS
-  public collect(data, group?: string | Array<string>, config?: object) {
+  public collect(data, group?: string | Array<string>, config?: any) {
     config = defineConfig(config, {
       append: true,
       byKeys: false

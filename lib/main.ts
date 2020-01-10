@@ -370,6 +370,7 @@ export default class Pulse {
     this._private.keys.collections.forEach(collectionName => {
       let collection = this._private.collections[collectionName];
 
+      // @ts-ignore // Property 'root' is protected and only accessible within class 'Module' and its subclasses.
       collection.initPersist(collection.root.persist);
     });
   }

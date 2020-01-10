@@ -1,7 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
-import typescript from '@rollup/plugin-typescript';
+import ts from '@wessberg/rollup-plugin-ts';
 import babel from 'rollup-plugin-babel';
 
 const prod = process.env.NODE_ENV === 'production';
@@ -31,7 +31,7 @@ export default {
     }
   ],
   plugins: [
-    typescript({ lib: ['es5', 'es6', 'dom'], target: 'es5' }),
+    ts({ lib: ['es5', 'es6', 'dom'], target: 'es5' }),
     nodeResolve({
       browser: true
     }),

@@ -41,6 +41,7 @@ export default {
     }
   },
   onReady(pulseConstructor: Pulse) {
+    // @ts-ignore
     const Vue = pulseConstructor.intergration.frameworkConstructor;
     Vue.use(pulseConstructor);
   }

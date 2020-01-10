@@ -6,8 +6,8 @@ import Computed from './computed';
 import { ComponentContainer } from './subController';
 export default class Dep {
   // these
-  public dependents: Set<Computed> = new Set();
-  public subscribers: Set<ComponentContainer> = new Set();
+  public dependents: Set<any> = new Set();
+  public subscribers: Set<any> = new Set();
 
   // these are temporary relations created by the relation controller
   public dynamicRelation: DynamicRelation = null;
@@ -75,9 +75,9 @@ export default class Dep {
       this.subscribe(this.global.subs.trackingComponent);
 
     // idk how i plan to use this...
-    if (subs.unsubscribingComponent) {
+    // if (subs.unsubscribingComponent) {
       // this.subscribers.delete(this.global.subscribingComponent);
-    }
+    // }
   }
 
   changed(newValue, config: any = {}) {
@@ -103,7 +103,7 @@ export default class Dep {
     }
   }
 
-  subscribe(componentContainer: ComponentContainer) {
+  subscribe(componentContainer: any) {
     componentContainer.deps.add(this);
     this.subscribers.add(componentContainer);
   }
